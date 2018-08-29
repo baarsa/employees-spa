@@ -20,5 +20,11 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx', '.css', '.es6'],
+  },
+  devServer: {
+    port: 8080,
+    historyApiFallback: {
+      index: 'index.html'
+    }
   }
 };
