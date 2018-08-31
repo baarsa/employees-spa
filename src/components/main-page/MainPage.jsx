@@ -3,8 +3,9 @@ import EmployeesList from './employees-list/EmployeesList';
 import { connect } from 'react-redux';
 import { getEmployees } from '../../actions';
 
-class MainPage extends React.Component {
-	componentHasMounted() {
+class MainPage extends React.Component {	
+
+	componentDidMount() {
 		this.props.getEmployees();
 	}
 
@@ -18,11 +19,17 @@ class MainPage extends React.Component {
 		)
 	}
 }
+const mapStateToProps = (state) => {
+	return {
+		loading: state.loading
+	};
+}
 
 const mapDispatchToProps = (dispatch) => {
+	let dis = dispatch;
 	return {
-		getEmployees: dispatch(getEmployees())
-	}
+		getEmployees: () => {dispatch(getEmployees()); }
+	};
 };
 
-export default MainPage;
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage);

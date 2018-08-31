@@ -1,7 +1,8 @@
 import * as actions from '../const/actionTypes';
 
 const initialState = {
-	loading: true,
+	loading: false,
+	error: "",
 	employees: {
 		1: {
     "id": 1,
@@ -20,14 +21,24 @@ const initialState = {
     "birthday": "26.01.1986"
   },
 	},
-	shownEmployees: [1, 2]
+	shownEmployees: []
 };
 
 const rootReducer = (state = initialState, action) => {
-	switch (action) {
+	switch (action.type) {
 		case actions.LOAD:
 			return {...state, loading: false};
-		case action.GET_EMPLOYEES_REQUEST:
+		case actions.GET_EMPLOYEES_REQUEST:
+			return {...state, loading: true};
+		case actions.GET_EMPLOYEES_SUCCESS:
+			return {
+				...state,
+				 employees: action.employees,
+				 shownEmployees: Object.keys(action.employees),
+				 loading: false
+				};
+		case actions.GET_EMPLOYEES_FAILURE:
+			return {...state, employees: action.employees, loading: false};
 		default:
 			return state;
 	}

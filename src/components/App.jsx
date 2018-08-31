@@ -9,11 +9,11 @@ import NoMatchPage from './no-match-page/NoMatchPage';
 const App = () => (	
 		<Router>
 			<Switch>
-			<Route path="/" exact="true" component={MainPage} />
+			<Route path="/" exact={true} component={MainPage} />
 			<Route path="/item/:id" component={ItemPage} />
 			<Route component={NoMatchPage} />
 			</Switch>
 		</Router>	
 )
 
-export default hot(module)(App);
+export default App;
