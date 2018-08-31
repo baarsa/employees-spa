@@ -1,10 +1,6 @@
 import * as actionTypes from '../const/actionTypes';
 import axios from 'axios';
 
-export const load = () => {
-	type: actionTypes.LOAD
-}
-
 export const getEmployees = () => {
 	return dispatch => {
 		dispatch({
@@ -14,7 +10,7 @@ export const getEmployees = () => {
 			.then(res => {
 				dispatch({
 					type: actionTypes.GET_EMPLOYEES_SUCCESS,
-					employees: convertArrayToObject(JSON.parse(res.data.employees))
+					employees:JSON.parse(res.data.employees)
 				});
 			})
 			.catch(err => {
@@ -24,7 +20,22 @@ export const getEmployees = () => {
 				});
 			});
 	}
-}
+};
+
+export const sortEmployees = field => {
+	return {
+		type: actionTypes.SORT_EMPLOYEES,
+		field
+	};
+};
+
+export const filterEmployees = (field, pattern) => {
+	return {
+		type: actionTypes.SORT_EMPLOYEES,
+		field,
+		pattern
+	};
+};
 
 const convertArrayToObject = arr => {
 	let result = {};

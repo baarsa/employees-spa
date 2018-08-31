@@ -1,12 +1,18 @@
 process.env.NODE_ENV = 'development';
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: {
+    index: [
+      "webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000",
+            "./src/index.js"
+    ]
+  },
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js',
-    publicPath: "/build"
+    publicPath: "/build/"
   },
   devtool: 'inline-source-map',
   module: {
@@ -21,10 +27,8 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.css', '.es6'],
   },
-  devServer: {
-    port: 8080,
-    historyApiFallback: {
-      index: 'index.html'
-    }
-  }
+  plugins: [
+    new webpack.HotModuleReplacementPlugin
+  ],
+  mode: 'development' 
 };
