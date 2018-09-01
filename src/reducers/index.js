@@ -4,11 +4,14 @@ const initialState = {
 	loading: false,
 	error: "",
 	employees: [],
-	filter: {
-		field: "",
-		pattern: ""
+	filters: {
+		role: "cook",
+		isArchive: true
 	},
-	sort: "name"
+	sort: {
+		field: "name",
+		direction: "asc"
+	}
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -22,9 +25,19 @@ const rootReducer = (state = initialState, action) => {
 				 loading: false
 				};
 		case actions.GET_EMPLOYEES_FAILURE:
-			return {...state, employees: action.employees, loading: false};
+			return {...state, loading: false};
+		case actions.FILTER_EMPLOYEES:
+			return {...state, filters: {
+				...state.filters,
+				role: action.filters.role,
+				isArchive: action.filters.isArchive
+			}};
 		case actions.SORT_EMPLOYEES:
-
+			return {...state, sort: {
+				...state.sort,
+				field: action.field,
+				direction: action.direction
+			}};
 		default:
 			return state;
 	}

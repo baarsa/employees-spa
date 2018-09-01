@@ -13,23 +13,30 @@ const EmployeesList = ({ employees }) =>  (
 
 const mapStateToProps = state => {
 	return {
-		employees: sort(filter(state.employees, state.filter), state.sort)		
+		employees: sort(filter(state.employees, state.filters), state.sort)		
 	};
 };
 
-const filter = (arr, filter) => {
-	if (filter.field === "") {
-		return arr;
-	}
-	return arr.filter(item => item[filter.field].indexOf(filter.pattern) > -1);
+const filter = (arr, filters) => {	
+	return arr.filter(item => {
+		let match = true;
+		Object.keys(filters).forEach(filter => {
+			let filterValue = filters[filter];
+			if (item[filter] !== filterValue) {
+				match = false;
+			}
+		});		
+		return match;
+	});
 };
 
-const sort = (arr, sortField) => {
-	if (sortField === "") {
+const sort = (arr, sort) => {
+	if (sort.field === "") {
 		return arr;
 	}
+	const multiplier = sort.direction === "asc" ? 1 : -1;
 	return arr.sort((a, b) => {
-		return a[sortField] < b[sortField] ? -1 : 1;
+		return (a[sort.field] < b[sort.field] ? -1  : 1) * multiplier;
 	});
 };
 

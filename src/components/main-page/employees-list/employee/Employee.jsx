@@ -1,4 +1,5 @@
 import React from 'react';
+import roleNames from '../../../../const/roleNames';
 
 const Employee = (props) => 
 {
@@ -7,7 +8,7 @@ const Employee = (props) =>
 return (
 	<tr>
 		<td>{ name }</td>
-		<td>{ role }</td>
+		<td>{ roleNames[role] }</td>
 		<td>{ phone }</td>
 	</tr>
 )

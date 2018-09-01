@@ -1,5 +1,7 @@
 import React from 'react';
 import EmployeesList from './employees-list/EmployeesList';
+import Filters from './filters/Filters';
+import Sorters from './sorters/Sorters';
 import { connect } from 'react-redux';
 import { getEmployees } from '../../actions';
 
@@ -14,7 +16,14 @@ class MainPage extends React.Component {
 	return (
 		<div>
 			Main Page111
-			{loading ? "Loading..." : <EmployeesList />}			
+			{loading 
+				? "Loading..." 
+				: <section>
+					<Filters />
+					<Sorters />
+					<EmployeesList />
+				  </section>
+			}			
 		</div>
 		)
 	}

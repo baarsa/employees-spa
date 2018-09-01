@@ -22,18 +22,18 @@ export const getEmployees = () => {
 	}
 };
 
-export const sortEmployees = field => {
-	return {
-		type: actionTypes.SORT_EMPLOYEES,
-		field
-	};
-};
-
-export const filterEmployees = (field, pattern) => {
+export const sortEmployees = (field, direction) => {
 	return {
 		type: actionTypes.SORT_EMPLOYEES,
 		field,
-		pattern
+		direction
+	};
+};
+
+export const filterEmployees = (filters) => {
+	return {
+		type: actionTypes.FILTER_EMPLOYEES,
+		filters
 	};
 };
 
