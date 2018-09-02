@@ -5,9 +5,9 @@ import roleNames from '../../../../const/roleNames';
 const Employee = (props) => 
 {
 	let data = props.data;
-	let { name, role, phone } = data;
+	let { name, role, phone, id } = data;
 return (		
-		<Link to="/employee/1">
+		<Link to={`/employee/${id}`}>
 		<td>{ name }</td>
 		<td>{ roleNames[role] }</td>
 		<td>{ phone }</td>

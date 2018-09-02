@@ -12,8 +12,11 @@ class EditEmployee extends React.Component {
 	}
 
 	onChange = (e) => {
+		let value = (e.target.name === "isArchive" 
+			? e.target.checked
+			: e.target.value);
 		this.setState({
-			[e.target.name]: e.target.value
+			[e.target.name]: value
 		});
 	}
 
