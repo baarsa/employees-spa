@@ -3,12 +3,19 @@ import Employee from './employee/Employee';
 import { connect } from 'react-redux';
 const uuidv1 = require('uuid/v1');
 
+import styles from './EmployeesList.scss';
+
 const EmployeesList = ({ employees }) =>  (	
-	<table>
-		<tbody>
-			{employees.map(employee => <Employee key={uuidv1()} data={employee} />)}
-		</tbody>
-	</table>
+	<section>
+		<section className={styles.heading}>
+			<div className={styles.headingCell}>имя</div>
+			<div className={styles.headingCell}>должность</div>
+			<div className={styles.headingCell}>телефон</div>
+		</section>
+		<ul className={styles.list}>				
+			{employees.map(employee => <Employee key={uuidv1()} data={employee} />)}		
+		</ul>
+	</section>
 	
 );
 

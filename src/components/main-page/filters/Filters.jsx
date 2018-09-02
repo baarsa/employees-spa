@@ -5,6 +5,8 @@ const uuidv1 = require('uuid/v1');
 import { filterEmployees } from '../../../actions';
 import roleNames from '../../../const/roleNames';
 
+import styles from './Filters.scss';
+
 class Filters extends React.Component {
 	onChange = () => {
 		let { changeFilters } = this.props;
@@ -20,9 +22,9 @@ class Filters extends React.Component {
 		let roleValue = filters.role;
 		let inArchive = filters.inArchive;
 		return (
-			<section>
-				Фильтрация
-				Должность
+			<section className={styles.root}>
+				<label className={styles.mainLabel}>Фильтрация</label>
+				<label className={styles.label}>Должность</label>
 				<select 					
 					value={roleValue} 
 					ref={node => {this.roleSelect = node;}}
@@ -32,7 +34,7 @@ class Filters extends React.Component {
 							{roleNames[role]}
 						</option>)}
 				</select>
-				<label>В архиве</label>
+				<label className={styles.label}>В архиве</label>
 				<input 
 					type="checkbox" 
 					checked={inArchive}

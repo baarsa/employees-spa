@@ -1,0 +1,14 @@
+.list {
+	padding: 0;
+}
+
+.heading {	
+	display: flex;
+	color: #999;
+}
+
+.headingCell {
+	flex-basis: 0;
+	flex-grow: 1;
+	text-transform: uppercase;
+}

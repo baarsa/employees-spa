@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 const uuidv1 = require('uuid/v1');
 import { sortEmployees } from '../../../actions';
 
+import styles from './Sorters.scss';
+
 class Sorters extends React.Component {
 	onChange = () => {
 		let { changeSort } = this.props;
@@ -15,7 +17,7 @@ class Sorters extends React.Component {
 		let { sort } = this.props;
 		let { field: currentField, direction } = sort;
 		return (
-			<section>
+			<section className={styles.root}>
 				Сортировка
 				<select 
 					value={currentField} 

@@ -1,0 +1,25 @@
+.root {	
+	border-bottom: 1px solid grey;
+	list-style: none;
+}
+
+.root:first-child {
+	border-top: 1px solid grey;
+}
+
+.root:hover {
+	background: grey;
+}
+
+.link {
+	display: flex;	
+	align-items: center;
+	color: inherit;
+	text-decoration: none;
+	height: 40px;
+}
+
+.cell {
+	flex-basis: 0;
+	flex-grow: 1;	
+}

@@ -6,6 +6,7 @@ import MainPage from './main-page/MainPage';
 import EmployeePage from './employee-page/EmployeePage';
 import NoMatchPage from './no-match-page/NoMatchPage';
 import { getEmployees } from '../actions';
+import styles from './App.scss';
 
 class App extends React.Component {
 
@@ -18,11 +19,13 @@ class App extends React.Component {
 			<Router>
 				{this.props.loading 
 					? <section>Loading...</section>
-					:<Switch>
-						<Route path="/" exact={true} component={MainPage} />
-						<Route path="/employee" component={EmployeePage} />
-						<Route component={NoMatchPage} />
-					</Switch>
+					:<section className={styles.root}>
+						<Switch>
+							<Route path="/" exact={true} component={MainPage} />
+							<Route path="/employee" component={EmployeePage} />
+							<Route component={NoMatchPage} />
+						</Switch>
+					</section>
 				}
 			</Router>	
 		);

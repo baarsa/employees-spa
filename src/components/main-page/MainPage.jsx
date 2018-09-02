@@ -13,7 +13,7 @@ const MainPage = () =>
 				<Filters />
 				<Sorters />
 				<EmployeesList />
-				<Link to="/employee/new">Добавить нового сотрудника</Link>								
+				<Link className={styles.addLink}  to="/employee/new">+</Link>								
 		</section>
 	);
 
