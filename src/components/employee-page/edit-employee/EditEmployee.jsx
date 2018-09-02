@@ -6,6 +6,8 @@ import { saveEmployee, closeMessage, showEmployeePageMessage } from '../../../ac
 import { connect } from 'react-redux';
 const uuidv1 = require('uuid/v1');
 
+import styles from './EditEmployee.scss';
+
 class EditEmployee extends React.Component {
 	constructor(props) {
 		super(props);
@@ -74,46 +76,59 @@ class EditEmployee extends React.Component {
 		let roles = ["cook", "waiter", "driver"];
 		return (
 			<section>
-				{ messageVisible && <section onClick={this.props.closeMessage}>{ message }</section> }
-				{this.title}
-				<label>{fieldNames["name"]}</label>
-				<input 
-					name="name" 
-					value={ name }
-					onChange={this.onChange}
-				/>
-				<label>{fieldNames["phone"]}</label>
-				<InputMask 
-					name="phone"
-					mask="+7 (999) 999-9999" 
-					value={phone} 
-					onChange={this.onChange} 
-				/>
-				<label>{fieldNames["birthday"]}</label>
-				<InputMask 
-					name="birthday"
-					mask="99.99.9999" 
-					value={birthday}
-					onChange={this.onChange} 
-				/>
-				<label>Должность</label>
-				<select 
-					name="role"
-					value={role}
-					onChange={this.onChange} 
-				>
-					{roles.map(role => (
-						<option key={uuidv1()} value={role}>
-							{roleNames[role]}
-						</option>))}
-				</select>
-				<label>В архиве</label>
-				<input
-					name="isArchive"
-					type="checkbox"
-					checked={isArchive}
-					onChange={this.onChange} 
-				/>
+				{ messageVisible 
+					&& <section className={styles.message} onClick={this.props.closeMessage}>
+						{ message }
+					</section> }
+				<h1>{this.title}</h1>
+				<section className={styles.formRow}>
+					<label>{fieldNames["name"]}</label>
+					<input 
+						name="name" 
+						value={ name }
+						onChange={this.onChange}
+					/>
+				</section>
+				<section className={styles.formRow}>
+					<label>{fieldNames["phone"]}</label>
+					<InputMask 
+						name="phone"
+						mask="+7 (999) 999-9999" 
+						value={phone} 
+						onChange={this.onChange} 
+					/>
+				</section>
+				<section className={styles.formRow}>
+					<label>{fieldNames["birthday"]}</label>
+					<InputMask 
+						name="birthday"
+						mask="99.99.9999" 
+						value={birthday}
+						onChange={this.onChange} 
+					/>
+				</section>
+				<section className={styles.formRow}>
+					<label>Должность</label>
+					<select 
+						name="role"
+						value={role}
+						onChange={this.onChange} 
+					>
+						{roles.map(role => (
+							<option key={uuidv1()} value={role}>
+								{roleNames[role]}
+							</option>))}
+					</select>
+				</section>
+				<section className={styles.formRow}>
+					<label>В архиве</label>
+					<input
+						name="isArchive"
+						type="checkbox"
+						checked={isArchive}
+						onChange={this.onChange} 
+					/>
+				</section>
 				<button onClick={this.handleSaveClick}>Сохранить изменения</button>
 			</section>
 		);
