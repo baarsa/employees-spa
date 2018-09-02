@@ -19,7 +19,36 @@ export const getEmployees = () => {
 					message: err.message
 				});
 			});
-	}
+	};
+};
+
+export const saveEmployee = (employee) => {
+	return dispatch => {
+		dispatch({
+			type: actionTypes.SAVE_EMPLOYEE_REQUEST
+		});
+		axios.post('/save-employee', {
+			employee: JSON.stringify(employee)
+		})
+			.then(res => {
+				dispatch({
+					type: actionTypes.SAVE_EMPLOYEE_SUCCESS,
+					employee
+				});
+			})
+			.catch(err => {
+				dispatch({
+					type: actionTypes.SAVE_EMPLOYEE_FAILURE,
+					message: err.message
+				});
+			});
+	};
+};
+
+export const closeMessage = () => {
+	return {
+		type: actionTypes.CLOSE_MESSAGE
+	};
 };
 
 export const sortEmployees = (field, direction) => {

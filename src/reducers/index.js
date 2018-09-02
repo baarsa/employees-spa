@@ -11,6 +11,10 @@ const initialState = {
 	sort: {
 		field: "name",
 		direction: "asc"
+	},
+	employeePage: {
+		showMessage: false,
+		message: ""
 	}
 };
 
@@ -26,6 +30,41 @@ const rootReducer = (state = initialState, action) => {
 				};
 		case actions.GET_EMPLOYEES_FAILURE:
 			return {...state, loading: false};
+		case actions.SAVE_EMPLOYEE_REQUEST:
+			return {
+					...state,
+					employeePage: {
+				 	showMessage: true,
+				 	message: "Идет сохранение данных..."
+				 }
+				};
+		case actions.SAVE_EMPLOYEE_SUCCESS:
+			return {
+				...state,
+				 employees: state.employees.map(employee => {
+				 	return employee.id === action.employee.id ? action.employee : employee;
+				 }),
+				 employeePage: {
+				 	showMessage: true,
+				 	message: "Данные сохранены"
+				 }
+				};
+		case actions.SAVE_EMPLOYEE_FAILURE:
+			return {
+				...state, 
+				employeePage: {
+				 	showMessage: true,
+				 	message: "Произошла ошибка, данные не сохранены"
+				 }
+			};
+		case actions.CLOSE_MESSAGE:
+			return {
+				...state,
+				employeePage: {
+					...state.employeePage,
+					showMessage: false
+				}
+			}
 		case actions.FILTER_EMPLOYEES:
 			return {...state, filters: {
 				...state.filters,

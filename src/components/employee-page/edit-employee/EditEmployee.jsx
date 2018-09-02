@@ -2,6 +2,7 @@ import React from 'react';
 import InputMask from 'react-input-mask';
 import fieldNames from '../../../const/fieldNames';
 import roleNames from '../../../const/roleNames';
+import { saveEmployee } from '../../../actions';
 import { connect } from 'react-redux';
 const uuidv1 = require('uuid/v1');
 
@@ -20,11 +21,18 @@ class EditEmployee extends React.Component {
 		});
 	}
 
+	handleSaveClick = () => {
+		//validation
+		this.props.saveEmployee(this.state);
+	}
+
 	render () {
 		let { name, phone, birthday, role, isArchive } = this.state;
+		let { showMessage, message } = this.props;
 		let roles = ["cook", "waiter", "driver"];
 		return (
 			<section>
+				{ showMessage && <section onClick={this.props.closeMessage}>{ message }</section> }
 				Edit Employee
 				<label>{fieldNames["name"]}</label>
 				<input 
@@ -64,7 +72,7 @@ class EditEmployee extends React.Component {
 					checked={isArchive}
 					onChange={this.onChange} 
 				/>
-				<button>Сохранить изменения</button>
+				<button onClick={this.handleSaveClick}>Сохранить изменения</button>
 			</section>
 		);
 	}
@@ -72,8 +80,21 @@ class EditEmployee extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
 	return {
-		employee: state.employees.filter(employee => employee.id === +ownProps.id)[0]
+		employee: state.employees.filter(employee => employee.id === +ownProps.id)[0],
+		showMessage: state.employeePage.showMessage,
+		message: state.employeePage.message
 	};
 };
 
-export default connect(mapStateToProps)(EditEmployee);
+const mapDispatchToProps = dispatch => {
+	return {
+		saveEmployee: (employee) => {
+			dispatch(saveEmployee(employee));
+		},
+		closeMessage: () => {
+			dispatch(closeMessage());
+		}
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditEmployee);

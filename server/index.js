@@ -17,6 +17,8 @@ app.use(
 );
 app.use(require('webpack-hot-middleware')(compiler));
 
+app.use(express.json());
+
 const buildPath = path.join(__dirname, '../', 'build');
 app.use('/', express.static(buildPath));
 
@@ -31,6 +33,18 @@ app.get('/get-employees', function(req, res) {
 	res.send({
 		employees
 	});
+});
+
+app.post('/save-employee', function(req, res) {
+	(new Employees(path.join(__dirname, '../', 'data/employees.json')))
+		.saveEmployee(JSON.parse(req.body.employee));
+	res.sendStatus(200);
+});
+
+app.post('/create-employee', function(req, res) {
+	(new Employees(path.join(__dirname, '../', 'data/employees.json')))
+		.createEmployee(JSON.parse(req.body.employee));
+	res.sendStatus(200);
 });
 
 http.createServer(app).listen(app.get('port'), () => {
