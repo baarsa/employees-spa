@@ -2,6 +2,7 @@ import React from 'react';
 import EmployeesList from './employees-list/EmployeesList';
 import Filters from './filters/Filters';
 import Sorters from './sorters/Sorters';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getEmployees } from '../../actions';
 
@@ -22,6 +23,7 @@ class MainPage extends React.Component {
 					<Filters />
 					<Sorters />
 					<EmployeesList />
+					<Link to="/employee/new">Добавить нового сотрудника</Link>
 				  </section>
 			}			
 		</div>

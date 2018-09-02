@@ -29,6 +29,7 @@ class Employees {
 		newEmployee.id = maxId + 1;
 		employees.push(newEmployee);
 		fs.writeFileSync(this.filename, JSON.stringify(employees));
+		return newEmployee.id;
 	}
 }
 

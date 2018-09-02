@@ -42,9 +42,11 @@ app.post('/save-employee', function(req, res) {
 });
 
 app.post('/create-employee', function(req, res) {
-	(new Employees(path.join(__dirname, '../', 'data/employees.json')))
+	let newId = (new Employees(path.join(__dirname, '../', 'data/employees.json')))
 		.createEmployee(JSON.parse(req.body.employee));
-	res.sendStatus(200);
+	res.send({
+		id: newId
+	});
 });
 
 http.createServer(app).listen(app.get('port'), () => {

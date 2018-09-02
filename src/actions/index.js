@@ -45,6 +45,32 @@ export const saveEmployee = (employee) => {
 	};
 };
 
+export const createEmployee = (employee) => {
+	return dispatch => {
+		dispatch({
+			type: actionTypes.CREATE_EMPLOYEE_REQUEST
+		});
+		axios.post('/create-employee', {
+			employee: JSON.stringify(employee)
+		})
+			.then(res => {
+				dispatch({
+					type: actionTypes.CREATE_EMPLOYEE_SUCCESS,
+					employee: {
+						...employee,
+						id: res.data.id
+					}
+				});
+			})
+			.catch(err => {
+				dispatch({
+					type: actionTypes.CREATE_EMPLOYEE_FAILURE,
+					message: err.message
+				});
+			});
+	};
+};
+
 export const showEmployeePageMessage = (message) => {
 	return {
 		type: actionTypes.SHOW_EMPLOYEE_PAGE_MESSAGE,

@@ -19,6 +19,8 @@ class EditEmployee extends React.Component {
 		}; 
 	}
 
+	title = "Редактирование данных сотрудника";
+
 	onChange = (e) => {
 		let value = (e.target.name === "isArchive" 
 			? e.target.checked
@@ -61,7 +63,9 @@ class EditEmployee extends React.Component {
 				return /^\+7 \([\d]{3}\) [\d]{3}-[\d]{4}$/.test(value);
 			case 'birthday':
 				return /^[\d]{2}\.[\d]{2}\.[\d]{4}$/.test(value);
-		}
+			default:
+				return true;
+		}		
 	}
 
 	render () {
@@ -71,7 +75,7 @@ class EditEmployee extends React.Component {
 		return (
 			<section>
 				{ showMessage && <section onClick={this.props.closeMessage}>{ message }</section> }
-				Edit Employee
+				{this.title}
 				<label>{fieldNames["name"]}</label>
 				<input 
 					name="name" 
@@ -137,5 +141,7 @@ const mapDispatchToProps = dispatch => {
 		}
 	};
 };
+
+export { EditEmployee as EditEmployeeComponent };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditEmployee);
