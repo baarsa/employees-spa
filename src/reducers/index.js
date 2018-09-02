@@ -57,6 +57,15 @@ const rootReducer = (state = initialState, action) => {
 				 	message: "Произошла ошибка, данные не сохранены"
 				 }
 			};
+		case actions.SHOW_EMPLOYEE_PAGE_MESSAGE:
+			return {
+				...state,
+				employeePage: {
+					...state.employeePage,
+					showMessage: true,
+				 	message: action.message
+				}
+			}
 		case actions.CLOSE_MESSAGE:
 			return {
 				...state,

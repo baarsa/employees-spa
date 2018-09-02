@@ -2,14 +2,21 @@ import React from 'react';
 import InputMask from 'react-input-mask';
 import fieldNames from '../../../const/fieldNames';
 import roleNames from '../../../const/roleNames';
-import { saveEmployee } from '../../../actions';
+import { saveEmployee, closeMessage, showEmployeePageMessage } from '../../../actions';
 import { connect } from 'react-redux';
 const uuidv1 = require('uuid/v1');
 
 class EditEmployee extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = props.employee;		
+		this.state = {
+			employee: props.employee,
+			fieldsValid: {
+				name: true,
+				phone: true,
+				birthday: true
+			}	
+		}; 
 	}
 
 	onChange = (e) => {
@@ -17,17 +24,48 @@ class EditEmployee extends React.Component {
 			? e.target.checked
 			: e.target.value);
 		this.setState({
-			[e.target.name]: value
+			employee: {
+				...this.state.employee,
+				[e.target.name]: value
+			},
+			fieldsValid: {
+				...this.state.fieldsValid,
+				[e.target.name]: this.isValueValid(e.target.name, e.target.value)
+			}
 		});
 	}
 
-	handleSaveClick = () => {
-		//validation
-		this.props.saveEmployee(this.state);
+	handleSaveClick = () => {				
+		if (this.allFieldsValid()) {
+			this.props.saveEmployee(this.state.employee);
+		} else {
+			this.props.showMessage("Проверьте правильность введенных данных");
+		}
+	}	
+
+	allFieldsValid = () => {
+		let valid = true;
+		Object.keys(this.state.fieldsValid).forEach(key => {
+			if (!this.state.fieldsValid[key]) {
+				valid = false;
+			}
+		});
+		return valid;
+	}
+
+	isValueValid = (name, value) => {
+		switch (name) {
+			case 'name':
+				return /^[\sА-Яа-я]{3,}$/.test(value);
+			case 'phone':
+				return /^\+7 \([\d]{3}\) [\d]{3}-[\d]{4}$/.test(value);
+			case 'birthday':
+				return /^[\d]{2}\.[\d]{2}\.[\d]{4}$/.test(value);
+		}
 	}
 
 	render () {
-		let { name, phone, birthday, role, isArchive } = this.state;
+		let { name, phone, birthday, role, isArchive } = this.state.employee;
 		let { showMessage, message } = this.props;
 		let roles = ["cook", "waiter", "driver"];
 		return (
@@ -93,6 +131,9 @@ const mapDispatchToProps = dispatch => {
 		},
 		closeMessage: () => {
 			dispatch(closeMessage());
+		},
+		showMessage: (message) => {
+			dispatch(showEmployeePageMessage(message));
 		}
 	};
 };

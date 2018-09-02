@@ -45,6 +45,13 @@ export const saveEmployee = (employee) => {
 	};
 };
 
+export const showEmployeePageMessage = (message) => {
+	return {
+		type: actionTypes.SHOW_EMPLOYEE_PAGE_MESSAGE,
+		message
+	};
+};
+
 export const closeMessage = () => {
 	return {
 		type: actionTypes.CLOSE_MESSAGE
