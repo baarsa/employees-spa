@@ -22,10 +22,6 @@ app.use(express.json());
 const buildPath = path.join(__dirname, '../', 'build');
 app.use('/', express.static(buildPath));
 
-app.get('/', function(req, res) {
-	res.sendFile(path.join(__dirname, '../', 'index.html'));
-});
-
 app.get('/get-employees', function(req, res) {
 	let employees = JSON.stringify(
 		(new Employees(path.join(__dirname, '../', 'data/employees.json'))).getEmployees()
@@ -47,6 +43,10 @@ app.post('/create-employee', function(req, res) {
 	res.send({
 		id: newId
 	});
+});
+
+app.get('/*', function(req, res) {
+	res.sendFile(path.join(__dirname, '../', 'index.html'));
 });
 
 http.createServer(app).listen(app.get('port'), () => {

@@ -70,11 +70,11 @@ class EditEmployee extends React.Component {
 
 	render () {
 		let { name, phone, birthday, role, isArchive } = this.state.employee;
-		let { showMessage, message } = this.props;
+		let { messageVisible, message } = this.props;
 		let roles = ["cook", "waiter", "driver"];
 		return (
 			<section>
-				{ showMessage && <section onClick={this.props.closeMessage}>{ message }</section> }
+				{ messageVisible && <section onClick={this.props.closeMessage}>{ message }</section> }
 				{this.title}
 				<label>{fieldNames["name"]}</label>
 				<input 
@@ -123,7 +123,7 @@ class EditEmployee extends React.Component {
 const mapStateToProps = (state, ownProps) => {
 	return {
 		employee: state.employees.filter(employee => employee.id === +ownProps.id)[0],
-		showMessage: state.employeePage.showMessage,
+		messageVisible: state.employeePage.showMessage,
 		message: state.employeePage.message
 	};
 };

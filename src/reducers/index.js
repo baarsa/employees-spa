@@ -1,7 +1,7 @@
 import * as actions from '../const/actionTypes';
 
 const initialState = {
-	loading: false,
+	loading: true,
 	error: "",
 	employees: [],
 	filters: {
