@@ -25,7 +25,8 @@ class Filters extends React.Component {
 			<section className={styles.root}>
 				<label className={styles.mainLabel}>Фильтрация</label>
 				<label className={styles.label}>Должность</label>
-				<select 					
+				<select 			
+					className={styles.roleSelect}		
 					value={roleValue} 
 					ref={node => {this.roleSelect = node;}}
 					onChange={this.onChange}>

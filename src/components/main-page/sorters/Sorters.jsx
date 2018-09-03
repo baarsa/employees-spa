@@ -18,8 +18,9 @@ class Sorters extends React.Component {
 		let { field: currentField, direction } = sort;
 		return (
 			<section className={styles.root}>
-				Сортировка
+				<label className={styles.mainLabel}>Сортировка</label>
 				<select 
+					className={styles.select}
 					value={currentField} 
 					ref={node => {this.fieldSelect = node;}}
 					onChange={this.onChange}>
@@ -31,6 +32,7 @@ class Sorters extends React.Component {
 						)}
 				</select>
 				<select 
+					className={styles.select}
 					value={direction} 
 					ref={node => {this.directionSelect = node;}}
 					onChange={this.onChange}>

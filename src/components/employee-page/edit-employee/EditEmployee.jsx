@@ -4,6 +4,7 @@ import fieldNames from '../../../const/fieldNames';
 import roleNames from '../../../const/roleNames';
 import { saveEmployee, closeMessage, showEmployeePageMessage } from '../../../actions';
 import { connect } from 'react-redux';
+import cn from 'classnames';
 const uuidv1 = require('uuid/v1');
 
 import styles from './EditEmployee.scss';
@@ -80,56 +81,79 @@ class EditEmployee extends React.Component {
 					&& <section className={styles.message} onClick={this.props.closeMessage}>
 						{ message }
 					</section> }
-				<h1>{this.title}</h1>
+				<h1 className={styles.title}>{this.title}</h1>
 				<section className={styles.formRow}>
-					<label>{fieldNames["name"]}</label>
-					<input 
-						name="name" 
-						value={ name }
-						onChange={this.onChange}
-					/>
+					<label className={styles.label}>{fieldNames["name"]}</label>
+					<div className={styles.inputWrapper}>
+						<input 
+							className={cn(styles.input,
+							 {[styles.inputInvalid]: !this.state.fieldsValid["name"]})}
+							name="name" 
+							value={ name }
+							onChange={this.onChange}
+						/>
+					</div>
 				</section>
 				<section className={styles.formRow}>
-					<label>{fieldNames["phone"]}</label>
-					<InputMask 
-						name="phone"
-						mask="+7 (999) 999-9999" 
-						value={phone} 
-						onChange={this.onChange} 
-					/>
+					<label className={styles.label}>{fieldNames["phone"]}</label>
+					<div className={styles.inputWrapper}>
+						<InputMask 
+							className={cn(styles.input,
+							 {[styles.inputInvalid]: !this.state.fieldsValid["phone"]})}
+							name="phone"
+							mask="+7 (999) 999-9999" 
+							value={phone} 
+							onChange={this.onChange} 
+						/>
+					</div>
 				</section>
 				<section className={styles.formRow}>
-					<label>{fieldNames["birthday"]}</label>
-					<InputMask 
-						name="birthday"
-						mask="99.99.9999" 
-						value={birthday}
-						onChange={this.onChange} 
-					/>
+					<label className={styles.label}>{fieldNames["birthday"]}</label>
+					<div className={styles.inputWrapper}>
+						<InputMask 
+							className={cn(styles.input,
+							 {[styles.inputInvalid]: !this.state.fieldsValid["birthday"]})}
+							name="birthday"
+							mask="99.99.9999" 
+							value={birthday}
+							onChange={this.onChange} 
+						/>
+					</div>
 				</section>
 				<section className={styles.formRow}>
-					<label>Должность</label>
-					<select 
-						name="role"
-						value={role}
-						onChange={this.onChange} 
-					>
-						{roles.map(role => (
-							<option key={uuidv1()} value={role}>
-								{roleNames[role]}
-							</option>))}
-					</select>
+					<label className={styles.label}>Должность</label>
+					<div className={styles.inputWrapper}>
+						<select 
+							className={styles.input}
+							name="role"
+							value={role}
+							onChange={this.onChange} 
+						>
+							{roles.map(role => (
+								<option key={uuidv1()} value={role}>
+									{roleNames[role]}
+								</option>))}
+						</select>
+					</div>
 				</section>
 				<section className={styles.formRow}>
-					<label>В архиве</label>
-					<input
-						name="isArchive"
-						type="checkbox"
-						checked={isArchive}
-						onChange={this.onChange} 
-					/>
+					<label className={styles.label}>В архиве</label>
+					<div className={styles.inputWrapper}>
+						<input
+							name="isArchive"
+							type="checkbox"
+							checked={isArchive}
+							onChange={this.onChange} 
+						/>
+					</div>
 				</section>
-				<button onClick={this.handleSaveClick}>Сохранить изменения</button>
+				<section className={styles.formRow}>
+					<button 
+						className={styles.submit}
+						onClick={this.handleSaveClick}>
+						 Сохранить изменения
+					</button>
+				</section>
 			</section>
 		);
 	}

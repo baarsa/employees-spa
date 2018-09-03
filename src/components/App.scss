@@ -1,4 +1,8 @@
+body {
+	background: #aaf;
+}
 .root {
+	position: relative;
 	width: 80%;
 	min-width: 600px;
 	min-height: 400px;
@@ -7,4 +11,5 @@
 	border: 1px solid grey;
 	border-radius: 5px;
 	padding: 20px;
+	background: #fff;
 }

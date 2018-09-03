@@ -27,7 +27,7 @@ class CreateEmployee extends EditEmployeeComponent {
 
 const mapStateToProps = (state) => {
 	return {		
-		showMessage: state.employeePage.showMessage,
+		messageVisible: state.employeePage.showMessage,
 		message: state.employeePage.message
 	};
 };
