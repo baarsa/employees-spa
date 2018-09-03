@@ -44,8 +44,29 @@ const sort = (arr, sort) => {
 	}
 	const multiplier = sort.direction === "asc" ? 1 : -1;
 	return arr.sort((a, b) => {
-		return (a[sort.field] < b[sort.field] ? -1  : 1) * multiplier;
+		return compare(sort.field, a[sort.field], b[sort.field]) * multiplier;
 	});
 };
+
+const compare = (field, a, b) => {
+	if (field === "birthday") {
+		let [day_a, month_a, year_a] = a.split('.');
+		let [day_b, month_b, year_b] = b.split('.');
+		if (year_a < year_b) {
+			return -1;
+		}
+		if (year_a > year_b) {
+			return 1;
+		}
+		if (month_a < month_b) {
+			return -1;
+		}
+		if (month_a > month_b) {
+			return 1;
+		}
+		return day_a < day_b ? - 1 : 1;
+	}
+	return a < b ? - 1 : 1;
+}
 
 export default connect(mapStateToProps)(EmployeesList);

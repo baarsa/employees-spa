@@ -29,7 +29,9 @@ const rootReducer = (state = initialState, action) => {
 				 loading: false
 				};
 		case actions.GET_EMPLOYEES_FAILURE:
-			return {...state, loading: false};
+			return {...state,
+				loading: false,
+			 	error: "Не удалось загрузить список сотрудников"};
 		case actions.SAVE_EMPLOYEE_REQUEST:
 			return {
 					...state,

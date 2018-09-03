@@ -18,14 +18,17 @@ class App extends React.Component {
 		return (	
 			<Router>
 				{this.props.loading 
-					? <section>Loading...</section>
-					:<section className={styles.root}>
-						<Switch>
-							<Route path="/" exact={true} component={MainPage} />
-							<Route path="/employee" component={EmployeePage} />
-							<Route component={NoMatchPage} />
-						</Switch>
-					</section>
+					? <section className={styles.message}>Загрузка...</section>
+					:(this.props.error !== ""
+						?<section className={styles.message}>{this.props.error}</section>
+						:<section className={styles.root}>
+							<Switch>
+								<Route path="/" exact={true} component={MainPage} />
+								<Route path="/employee" component={EmployeePage} />
+								<Route component={NoMatchPage} />
+							</Switch>
+						</section>
+					)
 				}
 			</Router>	
 		);
@@ -34,7 +37,8 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => {
 	return {
-		loading: state.loading
+		loading: state.loading,
+		error: state.error
 	};
 }
 

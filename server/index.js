@@ -23,26 +23,38 @@ const buildPath = path.join(__dirname, '../', 'build');
 app.use('/', express.static(buildPath));
 
 app.get('/get-employees', function(req, res) {
-	let employees = JSON.stringify(
-		(new Employees(path.join(__dirname, '../', 'data/employees.json'))).getEmployees()
-		);
-	res.send({
-		employees
-	});
+	try {
+		let employees = JSON.stringify(
+			(new Employees(path.join(__dirname, '../', 'data/employees.json'))).getEmployees()
+			);
+		res.send({
+			employees
+		});
+	} catch (err) {
+		res.status(500).send({ error: err.message });
+	}
 });
 
 app.post('/save-employee', function(req, res) {
-	(new Employees(path.join(__dirname, '../', 'data/employees.json')))
-		.saveEmployee(JSON.parse(req.body.employee));
-	res.sendStatus(200);
+	try {
+		(new Employees(path.join(__dirname, '../', 'data/employees.json')))
+			.saveEmployee(JSON.parse(req.body.employee));
+		res.sendStatus(200);
+	} catch (err) {
+		res.status(500).send({ error: err.message });
+	}
 });
 
 app.post('/create-employee', function(req, res) {
-	let newId = (new Employees(path.join(__dirname, '../', 'data/employees.json')))
-		.createEmployee(JSON.parse(req.body.employee));
-	res.send({
-		id: newId
-	});
+	try {
+		let newId = (new Employees(path.join(__dirname, '../', 'data/employees.json')))
+			.createEmployee(JSON.parse(req.body.employee));
+		res.send({
+			id: newId
+		});
+	} catch (err) {
+		res.status(500).send({ error: err.message });
+	}
 });
 
 app.get('/*', function(req, res) {
