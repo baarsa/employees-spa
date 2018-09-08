@@ -34,24 +34,28 @@ class Filters extends React.Component {
 					checked={filters.active} 
 					onChange={this.onToggleActive} />
 				<label className={styles.mainLabel}>Фильтрация</label>
-				<label className={styles.label}>Должность</label>
-				<select 			
-					className={styles.roleSelect}		
-					value={role} 
-					ref={node => {this.roleSelect = node;}}
-					onChange={this.onChange}>
-					{roles.map(role => 
-						<option key={uuidv1()} value={role}>
-							{roleNames[role]}
-						</option>)}
-				</select>
-				<label className={styles.label}>В архиве</label>
-				<input 
-					type="checkbox" 
-					checked={isArchive}
-					ref={node => {this.archiveCheckbox = node;}}
-					onChange={this.onChange}
-				 />
+				<div className={styles.filterItem}>
+					<label className={styles.label}>Должность</label>
+					<select 			
+						className={styles.roleSelect}		
+						value={role} 
+						ref={node => {this.roleSelect = node;}}
+						onChange={this.onChange}>
+						{roles.map(role => 
+							<option key={uuidv1()} value={role}>
+								{roleNames[role]}
+							</option>)}
+					</select>
+				</div>
+				<div className={styles.filterItem}>
+					<label className={styles.label}>В архиве</label>
+					<input 
+						type="checkbox" 
+						checked={isArchive}
+						ref={node => {this.archiveCheckbox = node;}}
+						onChange={this.onChange}
+					 />
+				 </div>
 			</section>
 		)
 	}

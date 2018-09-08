@@ -12,3 +12,9 @@
 	flex-grow: 1;
 	text-transform: uppercase;
 }
+
+@media (max-width: 600px) {
+	.headingCell {
+		font-size: 12px;
+	}
+}

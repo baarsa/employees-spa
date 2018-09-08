@@ -10,3 +10,11 @@
 .select {
 	margin-left: 10px;
 }
+
+@media (max-width: 600px) {
+	.select {
+		display: block;
+		margin-top: 5px;
+		margin-left: auto;
+	}
+}

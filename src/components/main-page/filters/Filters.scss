@@ -20,3 +20,14 @@
 .roleSelect {
 	margin-right: 10px;
 }
+
+.filterItem {
+	display: inline-block;
+}
+
+@media (max-width: 600px) {
+	.filterItem {
+		display: block;
+		margin-top: 5px;
+	}
+}
