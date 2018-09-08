@@ -5,8 +5,11 @@ const initialState = {
 	error: "",
 	employees: [],
 	filters: {
-		role: "cook",
-		isArchive: true
+		active: false,
+		fields: {
+			role: "cook",
+			isArchive: true
+		}
 	},
 	sort: {
 		field: "name",
@@ -111,9 +114,19 @@ const rootReducer = (state = initialState, action) => {
 		case actions.FILTER_EMPLOYEES:
 			return {...state, filters: {
 				...state.filters,
-				role: action.filters.role,
-				isArchive: action.filters.isArchive
+				fields: {
+					role: action.filters.role,
+					isArchive: action.filters.isArchive
+				}
 			}};
+		case actions.TOGGLE_FILTERS:
+			return {
+				...state,
+				filters: {
+					...state.filters,
+					active: action.active
+				}
+			}
 		case actions.SORT_EMPLOYEES:
 			return {...state, sort: {
 				...state.sort,

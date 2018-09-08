@@ -27,10 +27,14 @@ const mapStateToProps = state => {
 };
 
 const filter = (arr, filters) => {	
+	let { active, fields } = filters;
+	if (!active) {
+		return arr;
+	}
 	return arr.filter(item => {
 		let match = true;
-		Object.keys(filters).forEach(filter => {
-			let filterValue = filters[filter];
+		Object.keys(fields).forEach(filter => {
+			let filterValue = fields[filter];
 			if (item[filter] !== filterValue) {
 				match = false;
 			}

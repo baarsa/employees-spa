@@ -2,32 +2,42 @@ import React from 'react';
 import fieldNames from '../../../const/fieldNames';
 import { connect } from 'react-redux';
 const uuidv1 = require('uuid/v1');
-import { filterEmployees } from '../../../actions';
+import { filterEmployees, toggleFilters } from '../../../actions';
 import roleNames from '../../../const/roleNames';
+import cn from 'classnames';
 
 import styles from './Filters.scss';
 
 class Filters extends React.Component {
 	onChange = () => {
-		let { changeFilters } = this.props;
+		let { changeFilters, toggleFilters } = this.props;
+		toggleFilters(true);
 		changeFilters({
 			role: this.roleSelect.value,
 			isArchive: (this.archiveCheckbox.checked)
 		});
 	}
 
+	onToggleActive = (e) => {
+		this.props.toggleFilters(e.target.checked);
+	}
+
 	render () {		
 		const roles = ["cook", "waiter", "driver"];
 		let { filters } = this.props;
-		let roleValue = filters.role;
-		let inArchive = filters.inArchive;
+		let { role, isArchive } = filters.fields;
+		
 		return (
-			<section className={styles.root}>
+			<section className={cn(styles.root, {[styles.inactive]: !filters.active})}>
+				<input 
+					type="checkbox"
+					checked={filters.active} 
+					onChange={this.onToggleActive} />
 				<label className={styles.mainLabel}>Фильтрация</label>
 				<label className={styles.label}>Должность</label>
 				<select 			
 					className={styles.roleSelect}		
-					value={roleValue} 
+					value={role} 
 					ref={node => {this.roleSelect = node;}}
 					onChange={this.onChange}>
 					{roles.map(role => 
@@ -38,7 +48,7 @@ class Filters extends React.Component {
 				<label className={styles.label}>В архиве</label>
 				<input 
 					type="checkbox" 
-					checked={inArchive}
+					checked={isArchive}
 					ref={node => {this.archiveCheckbox = node;}}
 					onChange={this.onChange}
 				 />
@@ -57,6 +67,9 @@ const mapDispatchToProps = dispatch => {
 	return {
 		changeFilters: (filters) => {
 			dispatch(filterEmployees(filters));
+		},
+		toggleFilters: (active) => {
+			dispatch(toggleFilters(active));
 		}
 	};
 };

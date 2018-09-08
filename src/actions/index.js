@@ -99,6 +99,13 @@ export const filterEmployees = (filters) => {
 	};
 };
 
+export const toggleFilters = (active) => {
+	return {
+		type: actionTypes.TOGGLE_FILTERS,
+		active
+	};
+};
+
 const convertArrayToObject = arr => {
 	let result = {};
 	for (let i = 0; i < arr.length; i++) {
