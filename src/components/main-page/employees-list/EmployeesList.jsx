@@ -11,6 +11,7 @@ const EmployeesList = ({ employees }) =>  (
 			<div className={styles.headingCell}>имя</div>
 			<div className={styles.headingCell}>должность</div>
 			<div className={styles.headingCell}>телефон</div>
+			<div className={styles.headingCell}>дата рождения</div>
 		</section>
 		<ul className={styles.list}>				
 			{employees.map(employee => <Employee key={uuidv1()} data={employee} />)}		
