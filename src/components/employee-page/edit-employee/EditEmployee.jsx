@@ -4,6 +4,7 @@ import fieldNames from '../../../const/fieldNames';
 import roleNames from '../../../const/roleNames';
 import { saveEmployee, closeMessage, showEmployeePageMessage } from '../../../actions';
 import { connect } from 'react-redux';
+import { push } from 'connected-react-router';
 import cn from 'classnames';
 const uuidv1 = require('uuid/v1');
 
@@ -73,12 +74,14 @@ class EditEmployee extends React.Component {
 
 	render () {
 		let { name, phone, birthday, role, isArchive } = this.state.employee;
-		let { messageVisible, message } = this.props;
+		let { messageVisible, message, messageRedirect } = this.props;
 		let roles = ["cook", "waiter", "driver"];
 		return (
 			<section>
 				{ messageVisible 
-					&& <section className={styles.message} onClick={this.props.closeMessage}>
+					&& <section 
+						className={styles.message} 
+						onClick={() => {this.props.closeMessage(messageRedirect);}}>
 						{ message }
 					</section> }
 				<h1 className={styles.title}>{this.title}</h1>
@@ -163,7 +166,8 @@ const mapStateToProps = (state, ownProps) => {
 	return {
 		employee: state.employees.filter(employee => employee.id === +ownProps.id)[0],
 		messageVisible: state.employeePage.showMessage,
-		message: state.employeePage.message
+		message: state.employeePage.message,
+		messageRedirect: state.employeePage.messageRedirect
 	};
 };
 
@@ -172,8 +176,11 @@ const mapDispatchToProps = dispatch => {
 		saveEmployee: (employee) => {
 			dispatch(saveEmployee(employee));
 		},
-		closeMessage: () => {
+		closeMessage: (redirect) => {
 			dispatch(closeMessage());
+			if (redirect !== "") {
+				dispatch(push(redirect));
+			}
 		},
 		showMessage: (message) => {
 			dispatch(showEmployeePageMessage(message));

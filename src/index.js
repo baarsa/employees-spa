@@ -2,11 +2,14 @@ import React from 'react';
 import { render } from 'react-dom';
 import configureStore from './store';
 import { Provider } from 'react-redux';
+import { createBrowserHistory } from 'history';
 import App from './components/App';
 
+const history = createBrowserHistory();
+
 render(
-	<Provider store={configureStore()}>
-		<App />
+	<Provider store={configureStore(history)}>
+		<App history={history} />
 	</Provider>
 	,
 	document.getElementById('root')

@@ -2,6 +2,7 @@ import React from 'react';
 import { EditEmployeeComponent } from '../edit-employee/EditEmployee';
 import { createEmployee, closeMessage, showEmployeePageMessage } from '../../../actions';
 import { connect } from 'react-redux';
+import { push } from 'connected-react-router';
 
 class CreateEmployee extends EditEmployeeComponent {
 	constructor(props) {
@@ -28,7 +29,8 @@ class CreateEmployee extends EditEmployeeComponent {
 const mapStateToProps = (state) => {
 	return {		
 		messageVisible: state.employeePage.showMessage,
-		message: state.employeePage.message
+		message: state.employeePage.message,
+		messageRedirect: state.employeePage.messageRedirect
 	};
 };
 
@@ -37,8 +39,11 @@ const mapDispatchToProps = dispatch => {
 		saveEmployee: (employee) => {
 			dispatch(createEmployee(employee));
 		},
-		closeMessage: () => {
+		closeMessage: (redirect) => {
 			dispatch(closeMessage());
+			if (redirect !== "") {
+				dispatch(push(redirect));
+			}
 		},
 		showMessage: (message) => {
 			dispatch(showEmployeePageMessage(message));

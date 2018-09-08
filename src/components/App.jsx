@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { connect } from 'react-redux';
+import { ConnectedRouter } from 'connected-react-router';
 import MainPage from './main-page/MainPage';
 import EmployeePage from './employee-page/EmployeePage';
 import NoMatchPage from './no-match-page/NoMatchPage';
@@ -16,7 +17,7 @@ class App extends React.Component {
 
 	render () {
 		return (	
-			<Router>
+			<ConnectedRouter history={this.props.history}>
 				{this.props.loading 
 					? <section className={styles.message}>Загрузка...</section>
 					:(this.props.error !== ""
@@ -30,7 +31,7 @@ class App extends React.Component {
 						</section>
 					)
 				}
-			</Router>	
+			</ConnectedRouter>	
 		);
 	}
 }

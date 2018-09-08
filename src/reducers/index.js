@@ -14,7 +14,8 @@ const initialState = {
 	},
 	employeePage: {
 		showMessage: false,
-		message: ""
+		message: "",
+		messageRedirect: ""
 	}
 };
 
@@ -48,14 +49,15 @@ const rootReducer = (state = initialState, action) => {
 				 }),
 				 employeePage: {
 				 	showMessage: true,
-				 	message: "Данные сохранены"
+				 	message: "Данные сохранены",
+				 	messageRedirect: "/"
 				 }
 				};
 		case actions.SAVE_EMPLOYEE_FAILURE:
 			return {
 				...state, 
 				employeePage: {
-				 	showMessage: true,
+				 	showMessage: true,				 	
 				 	message: "Произошла ошибка, данные не сохранены"
 				 }
 			};
@@ -76,7 +78,8 @@ const rootReducer = (state = initialState, action) => {
 				 ],
 				 employeePage: {
 				 	showMessage: true,
-				 	message: "Данные сохранены"
+				 	message: "Данные сохранены",
+				 	messageRedirect: "/"
 				 }
 				};
 		case actions.CREATE_EMPLOYEE_FAILURE:
@@ -101,7 +104,8 @@ const rootReducer = (state = initialState, action) => {
 				...state,
 				employeePage: {
 					...state.employeePage,
-					showMessage: false
+					showMessage: false,
+					messageRedirect: ""
 				}
 			}
 		case actions.FILTER_EMPLOYEES:
