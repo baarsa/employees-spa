@@ -65,3 +65,9 @@
 	border-radius: 10px;
 	background: #fff;
 }
+
+@media (max-width: 390px) {
+	.title {
+		font-size: 18px;
+	}
+}
