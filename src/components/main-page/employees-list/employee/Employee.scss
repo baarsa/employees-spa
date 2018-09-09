@@ -23,3 +23,10 @@
 	flex-basis: 0;
 	flex-grow: 1;	
 }
+
+@media (max-width: 390px) {
+	.link {
+		flex-direction: column;
+		height: auto;
+	}
+}
