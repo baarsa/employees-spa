@@ -16,7 +16,7 @@ const employeePageReducer = (state = initialState, action) => {
 				 	message: "Идет сохранение данных..."
 				};
 		case actions.SAVE_EMPLOYEE_SUCCESS:
-		case action.CREATE_EMPLOYEE_SUCCESS:
+		case actions.CREATE_EMPLOYEE_SUCCESS:
 			return {
 					...state,
 				 	showMessage: true,

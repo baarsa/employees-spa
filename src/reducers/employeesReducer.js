@@ -7,7 +7,7 @@ const employeesReducer = (employeesState = initialState, action) => {
 		case actions.GET_EMPLOYEES_SUCCESS:
 			return action.employees;
 		case actions.SAVE_EMPLOYEE_SUCCESS:
-			return state.employeesState.map(employee => {
+			return employeesState.map(employee => {
 				 	return employee.id === action.employee.id ? action.employee : employee;
 			});
 		case actions.CREATE_EMPLOYEE_SUCCESS:

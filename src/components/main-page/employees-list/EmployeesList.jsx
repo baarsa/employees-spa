@@ -48,7 +48,7 @@ const sort = (arr, sort) => {
 		return arr;
 	}
 	const multiplier = sort.direction === "asc" ? 1 : -1;
-	return arr.sort((a, b) => {
+	return arr.slice(0).sort((a, b) => {
 		return compare(sort.field, a[sort.field], b[sort.field]) * multiplier;
 	});
 };
