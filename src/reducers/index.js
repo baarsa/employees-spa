@@ -1,4 +1,11 @@
 import * as actions from '../const/actionTypes';
+import employeePage from './employeePageReducer';
+import employees from './employeesReducer';
+import error from './errorReducer';
+import filters from './filtersReducer';
+import loading from './loadingReducer';
+import sort from './sortReducer';
+import { combineReducers } from 'redux';
 
 const initialState = {
 	loading: true,
@@ -21,6 +28,17 @@ const initialState = {
 		messageRedirect: ""
 	}
 };
+
+const rootReducer = combineReducers({
+	loading,
+	error,
+	employees,
+	filters,
+	sort,
+	employeePage
+});
+
+/*
 
 const rootReducer = (state = initialState, action) => {
 	switch (action.type) {		
@@ -110,32 +128,12 @@ const rootReducer = (state = initialState, action) => {
 					showMessage: false,
 					messageRedirect: ""
 				}
-			}
-		case actions.FILTER_EMPLOYEES:
-			return {...state, filters: {
-				...state.filters,
-				fields: {
-					role: action.filters.role,
-					isArchive: action.filters.isArchive
-				}
-			}};
-		case actions.TOGGLE_FILTERS:
-			return {
-				...state,
-				filters: {
-					...state.filters,
-					active: action.active
-				}
-			}
-		case actions.SORT_EMPLOYEES:
-			return {...state, sort: {
-				...state.sort,
-				field: action.field,
-				direction: action.direction
-			}};
+			}	
+		
 		default:
 			return state;
 	}
 };
+*/
 
 export default rootReducer;
